@@ -17,6 +17,7 @@ if ($LASTEXITCODE) { Throw }
 write-host "# python"
 (Get-Command -Name python -CommandType Application).Source
 python -V
+python3 -V
 if ($LASTEXITCODE) { Throw }
 (Get-Command -Name pip -CommandType Application).Source
 pip --version
