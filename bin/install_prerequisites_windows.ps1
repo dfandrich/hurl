@@ -59,5 +59,6 @@ if ($LASTEXITCODE) { Throw }
 
 # refresh PATH
 echo "==== refresh PATH"
+Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
 refreshenv
 
