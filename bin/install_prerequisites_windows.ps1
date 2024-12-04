@@ -21,6 +21,11 @@ Set-ItemProperty -Path HKCU:\Environment -Name VCPKGRS_DYNAMIC -Value "1"
 $env:VCPKGRS_DYNAMIC = [System.Environment]::GetEnvironmentVariable("VCPKGRS_DYNAMIC","User")
 if ($LASTEXITCODE) { Throw }
 
+# install python 3.11
+echo "==== install python 3.11"
+choco install --confirm python311
+if ($LASTEXITCODE) { Throw }
+
 # update pip
 python -m pip install --upgrade pip --quiet
 if ($LASTEXITCODE) { Throw }
