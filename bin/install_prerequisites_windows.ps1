@@ -24,10 +24,13 @@ if ($LASTEXITCODE) { Throw }
 # install python 3.11
 echo "==== install python 3.11"
 choco install --confirm python311
-if ($LASTEXITCODE) { Throw }
-
-# update pip
-python -m pip install --upgrade pip --quiet
+# add python to PATH
+$registry_user_path=(Get-ItemProperty -Path 'HKCU:\Environment').Path
+$registry_machine_path=(Get-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment').Path
+echo registry_user_path $registry_user_path
+echo registry_machine_path $registry_machine_path
+$env:Path = "C:\hostedtoolcache\windows\Python\3.11.9\x64;$registry_user_path;$registry_machine_path"
+sleep 10
 if ($LASTEXITCODE) { Throw }
 
 # install proxy
@@ -56,9 +59,3 @@ Get-Process | Where {$_.Name -eq "Squid"} | tee -Append -filepath integration\bu
 echo "==== install jq"
 choco install --confirm jq
 if ($LASTEXITCODE) { Throw }
-
-# refresh PATH
-echo "==== refresh PATH"
-Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
-refreshenv
-
