@@ -552,10 +552,10 @@ jobs:
       with:
         path: C:\vcpkg
         key: ${{ runner.os }}-release-windows-x64
-    - name: Environment
-      run: .\bin\environment.ps1
     - name: Install prerequisites
       run: .\bin\install_prerequisites_windows.ps1
+    - name: Environment
+      run: .\bin\environment.ps1
     - name: Build
       run: |
         .\bin\release\release.ps1
