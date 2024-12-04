@@ -24,12 +24,13 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libxml2-dev \
     libssl-dev \
     python3.11 \
+    python3.11-distutils \
     python3.11-venv \
     netcat-openbsd \
     squid \
     jq
+sudo curl -sS https://bootstrap.pypa.io/get-pip.py | python3.11
 sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
-sudo python3 -m pip install --upgrade pip
 sudo service squid stop || true
 sudo squid -k shutdown || true
 sudo rm -v /dev/shm/squid*.shm >/dev/null 2>&1 || true
