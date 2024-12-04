@@ -22,7 +22,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libxml2-dev \
     libssl-dev \
     python3.11 \
-    python3.11-venv \
+    python3-venv \
     netcat-openbsd \
     squid \
     jq
