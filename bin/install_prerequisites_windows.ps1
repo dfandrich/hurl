@@ -56,3 +56,8 @@ Get-Process | Where {$_.Name -eq "Squid"} | tee -Append -filepath integration\bu
 echo "==== install jq"
 choco install --confirm jq
 if ($LASTEXITCODE) { Throw }
+
+# refresh PATH
+echo "==== refresh PATH"
+refreshenv
+
