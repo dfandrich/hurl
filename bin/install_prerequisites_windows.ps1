@@ -22,15 +22,10 @@ $env:VCPKGRS_DYNAMIC = [System.Environment]::GetEnvironmentVariable("VCPKGRS_DYN
 if ($LASTEXITCODE) { Throw }
 
 # install python 3.11
+echo "==== remove preinstalled python"
+get-package | Where{$_.name -like "*Python*"} | Uninstall-Package -Scope AllUsers -AllVersions -Force
 echo "==== install python 3.11"
 choco install --confirm python311
-# add python to PATH
-$registry_user_path=(Get-ItemProperty -Path 'HKCU:\Environment').Path
-$registry_machine_path=(Get-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment').Path
-echo registry_user_path $registry_user_path
-echo registry_machine_path $registry_machine_path
-$env:Path = "C:\hostedtoolcache\windows\Python\3.11.9\x64;$registry_user_path;$registry_machine_path"
-sleep 10
 if ($LASTEXITCODE) { Throw }
 
 # install proxy
