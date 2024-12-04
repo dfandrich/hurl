@@ -7,6 +7,8 @@ if ! command -V sudo  ; then
     apt-get update
     DEBIAN_FRONTEND=noninteractive apt-get -y install sudo
 fi
+
+sudo add-apt-repository -y ppa:deadsnakes/ppa
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install \
     bash \
@@ -22,10 +24,12 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -y install \
     libxml2-dev \
     libssl-dev \
     python3.11 \
-    python3-venv \
+    python3.11-venv \
     netcat-openbsd \
     squid \
     jq
+sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
+sudo python3 -m pip install --upgrade pip
 sudo service squid stop || true
 sudo squid -k shutdown || true
 sudo rm -v /dev/shm/squid*.shm >/dev/null 2>&1 || true
